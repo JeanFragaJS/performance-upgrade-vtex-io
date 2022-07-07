@@ -1,6 +1,16 @@
 {
   "store.search": {
-    "blocks": ["search-result-layout#search"]
+    "blocks": ["search-result-layout#search"], 
+    "props": {
+      //otimizar o contexto de busca
+      "context": {
+        //garantir redução de resultados carregados 
+        "skusFilter": "FIRST_AVALABLLE",
+        //tornar os preços mais cacheáveis 
+        //e evitar simulá-los para cada resultado de busca obtido
+        "simulationBehavior": "skip"
+      }
+    }
   },
 
   "search-result-layout#search": {
@@ -201,7 +211,8 @@
 
   "flex-layout.row#depBanner": {
     "children": [
-      "info-card#depbanner"
+      //"info-card#depbanner"
+      "image#depbanner"
     ]
   },
 
@@ -301,5 +312,11 @@
 
   "gallery": {
     "blocks": ["product-summary.shelf"]
+  },
+
+  "image#depbanner": {
+    "props": {
+      "src": "assets/cafe.png"
+    }
   }
 }

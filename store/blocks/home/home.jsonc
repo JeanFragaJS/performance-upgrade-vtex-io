@@ -2,8 +2,22 @@
   "store.home": {
     "blocks": [
       "flex-layout.row#slider",
-      "shelf#new-arrivals",
-      "shelf#clearance",
+      "rich-text#new-arrivals",
+      "list-context.product-list#new-arrivals",
+      "rich-text#clearance",
+      "list-context.product-list#clearance",
+      "__fold__",
+      /*
+      Inicialmente quando um usuário entra na loja 
+      existe um limite do quanto este consegue ver. 
+      É por isso que com o bloco de __fold__ você 
+      consegue controlar o que inicialmente será visto, 
+      diminuindo assim a necessidade de carregamento 
+      de dados no load inicial. Automaticamente, 
+      o que fica abaixo do __fold__ é então carregado 
+      depois que o essencial já estiver disponível e 
+      o usuário começar a scrollar para baixo.
+      */
       "flex-layout.row#newsletter",
       "rich-text#brands",
       "flex-layout.row#brands",
@@ -44,37 +58,45 @@
     }
   },
 
-  "shelf#new-arrivals": {
+  "list-context.product-list#new-arrivals": {
     "blocks": ["product-summary.shelf"],
+    "children": ["slider-layout#shelf"],
     "props": {
-      "orderBy": "OrderByTopSaleDESC",
-      "paginationDotsVisibility": "never",
-      "collection": "139",
-      "productList": {
-        "maxItems": 9,
-        "itemsPerPage": 3,
-        "minItemsPerPage": 1.5,
-        "scroll": "BY_PAGE",
-        "arrows": true,
-        "titleText": "New arrivals"
+      "orderBy": "OrderByTopSaleDESC"
       }
-    }
-  },
+    },
 
-  "shelf#clearance": {
+  "list-context.product-list#clearance": {
     "blocks": ["product-summary.shelf"],
+    "children": ["slider-layout#shelf"],
     "props": {
-      "orderBy": "OrderByTopSaleDESC",
-      "collection": "140",
-      "paginationDotsVisibility": "desktopOnly",
-      "productList": {
-        "maxItems": 9,
-        "itemsPerPage": 3,
-        "minItemsPerPage": 1.5,
-        "scroll": "BY_PAGE",
-        "arrows": true,
-        "titleText": "Clearance"
+      "orderBy": "OrderByTopSaleDESC"
       }
-    }
-  }
+    },
+
+    "slider-layout#shelf": {
+      "props": {
+        "itemsPerPage": {
+        "desktop": 3
+        }
+      }
+    },
+
+  "rich-text#new-arrivals": {
+       "props": {
+         "text": "New arrivals",
+         "font": "t-heading-2",
+         "textPosition": "CENTER",
+         "textAlign": "CENTER"
+       }
+     },
+
+     "rich-text#clearance": {
+       "props": {
+         "text": "Clearance",
+         "font": "t-heading-2",
+         "textPosition": "CENTER",
+         "textAlign": "CENTER"
+       }
+     }
 }
